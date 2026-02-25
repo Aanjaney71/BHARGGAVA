@@ -1,0 +1,85 @@
+/* Room classes logic */
+
+.room-section {
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Global Merge & Fade Intermix Effect 
+   Seamlessly bleeds the hard edges of each room into a cinematic warm-black shadow 
+   that seamlessly connects to the adjacent room without darkening the text (z-index: 5 vs z-10).
+*/
+.room-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    background: linear-gradient(to bottom,
+            rgba(20, 15, 12, 1) 0%,
+            rgba(20, 15, 12, 0) 12%,
+            rgba(20, 15, 12, 0) 88%,
+            rgba(20, 15, 12, 1) 100%);
+}
+
+.hallway-transition {
+    overflow: hidden;
+    height: 30vh;
+}
+
+.hallway-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-origin: center center;
+}
+
+.wall-frames {
+    position: absolute;
+    top: 20%;
+    display: flex;
+    gap: 40px;
+}
+
+.left-frames {
+    left: -10%;
+}
+
+.right-frames {
+    right: -10%;
+}
+
+.staircase-transition {
+    height: 40vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.staircase-img {
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+}
+
+.ceiling-lights {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+.ceiling-light {
+    width: 10px;
+    height: 10px;
+    background: #FFE4B5;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px rgba(255, 228, 181, 0.4);
+}

@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --accent-warm: #F59E0B;
+    --ambient-glow: rgba(251, 191, 36, 0.08);
+    --text-primary: #ffffff;
+    --overlay-color: rgba(10, 10, 20, 0.5);
+    transition: background-color 1.5s ease, color 1.5s ease;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+.text-accent {
+    color: var(--accent-warm);
+}
+
+.bg-accent {
+    background-color: var(--accent-warm);
+}
+
+/* 
+ * Global Pop Effects 
+ * Makes major elements pop slightly when hovered 
+ */
+.room-section p,
+.room-section h1,
+.room-section h2,
+.room-section h3,
+.room-section h4,
+.room-section img,
+.room-section a,
+.room-section button,
+.room-section .service-item-1,
+.room-section .service-item-2,
+.room-section .review-card,
+.room-section .postcard-form {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.room-section p:hover,
+.room-section h1:hover,
+.room-section h2:hover,
+.room-section h3:hover,
+.room-section h4:hover {
+    transform: scale(1.02);
+    text-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    position: relative;
+}
+
+.room-section a:hover,
+.room-section button:hover,
+.room-section .service-item-1:hover,
+.room-section .service-item-2:hover,
+.room-section .review-card:hover,
+.room-section .postcard-form:hover {
+    transform: scale(1.05);
+    z-index: 50;
+    position: relative;
+}
+
+/* Prevent backgrounds from scaling unexpectedly */
+.room-section img.parallax-bg:hover {
+    transform: none;
+}
