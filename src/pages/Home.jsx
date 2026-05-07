@@ -37,11 +37,9 @@ export default function Home() {
             const bgs = gsap.utils.toArray('.parallax-bg')
             bgs.forEach((bg) => {
                 gsap.fromTo(bg, {
-                    scale: 1,
-                    y: "-5%"
+                    y: "-10%"
                 }, {
-                    scale: 1.15,
-                    y: "5%",
+                    y: "10%",
                     scrollTrigger: {
                         trigger: bg.closest('.room-section'),
                         start: "top bottom",

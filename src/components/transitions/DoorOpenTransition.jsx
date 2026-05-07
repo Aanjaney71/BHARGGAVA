@@ -31,27 +31,27 @@ const DoorOpenTransition = ({ onOpen }) => {
             // 1. Subtle glow effect in the door crack
             tl.to(glowRef.current, {
                 opacity: 1,
-                duration: 0.6,
+                duration: 0.3,
                 ease: 'power2.in'
             })
 
             // 2. Both door panels swing open simultaneously
             tl.to(leftPanelRef.current, {
                 rotateY: -110,
-                duration: 1.4,
+                duration: 0.8,
                 ease: 'power2.inOut'
-            }, '-=0.2')
+            }, '-=0.1')
 
             tl.to(rightPanelRef.current, {
                 rotateY: 110,
-                duration: 1.4,
+                duration: 0.8,
                 ease: 'power2.inOut'
             }, '<')
 
             // 3. Fade out the whole overlay
             tl.to(containerRef.current, {
                 opacity: 0,
-                duration: 0.5,
+                duration: 0.3,
                 ease: 'power1.out',
                 onStart: () => {
                     // Trigger hero text animations as doors open
@@ -62,8 +62,8 @@ const DoorOpenTransition = ({ onOpen }) => {
                         containerRef.current.style.display = 'none'
                     }
                 }
-            }, '-=0.4')
-        }, 800)
+            }, '-=0.2')
+        }, 300)
 
         return () => clearTimeout(timer)
     }, [onOpen])

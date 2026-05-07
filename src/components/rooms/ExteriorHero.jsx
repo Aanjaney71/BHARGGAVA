@@ -31,13 +31,20 @@ const ExteriorHero = ({ isGateOpen }) => {
                 }, "-=0.3")
         });
 
-        const handleScroll = () => {
-            const scrollY = window.scrollY
-            document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`)
-        }
-        window.addEventListener('scroll', handleScroll, { passive: true })
+            // Replace raw scroll event with optimized GSAP ScrollTrigger
+            gsap.to(".layer-sky", {
+                y: 100, // Roughly equivalent to previous var(--scroll-y) * 0.1
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#exterior-room",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            })
+        });
+
         return () => {
-            window.removeEventListener('scroll', handleScroll)
             ctx.revert()
         }
     }, [isGateOpen])
@@ -69,8 +76,7 @@ const ExteriorHero = ({ isGateOpen }) => {
             {/* Layer Parallax */}
             <div className="absolute inset-0 z-10 pointer-events-none">
                 <div className="layer-sky absolute inset-0 bg-cover bg-center border-b border-black/10 opacity-40 mix-blend-screen" style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop')",
-                    transform: 'translateY(calc(var(--scroll-y, 0px) * 0.1))'
+                    backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop')"
                 }}></div>
             </div>
 
