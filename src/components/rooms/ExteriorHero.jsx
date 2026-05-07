@@ -35,7 +35,7 @@ const ExteriorHero = ({ isGateOpen }) => {
             const scrollY = window.scrollY
             document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`)
         }
-        window.addEventListener('scroll', handleScroll)
+        window.addEventListener('scroll', handleScroll, { passive: true })
         return () => {
             window.removeEventListener('scroll', handleScroll)
             ctx.revert()
@@ -77,26 +77,26 @@ const ExteriorHero = ({ isGateOpen }) => {
             {/* Content */}
             <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4">
                 <div className="bg-black/40 p-8 md:p-12 rounded-3xl backdrop-blur-md border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col items-center">
-                    <h1 className="exterior-title text-5xl md:text-8xl font-serif text-white flex flex-wrap justify-center overflow-hidden pb-4 drop-shadow-2xl">
+                    <h1 className="exterior-title text-4xl sm:text-5xl md:text-8xl font-serif text-white flex flex-wrap justify-center overflow-hidden pb-4 drop-shadow-2xl" itemProp="name">
                         {titleWords.map((word, index) => (
                             <span key={index} className="inline-block mr-4 md:mr-6 last:mr-0">{word}</span>
                         ))}
                     </h1>
 
-                    <p className="exterior-subtitle text-xl md:text-2xl text-white max-w-2xl mt-4 tracking-wide font-light drop-shadow-xl">
+                    <p className="exterior-subtitle text-lg sm:text-xl md:text-2xl text-white max-w-2xl mt-4 tracking-wide font-light drop-shadow-xl">
                         We design spaces that breathe, inspire, and elevate the human experience.
                     </p>
 
-                    <div className="exterior-cta-group flex flex-col sm:flex-row gap-6 mt-10">
+                    <div className="exterior-cta-group flex flex-col sm:flex-row gap-4 sm:gap-6 mt-8 sm:mt-10 w-full sm:w-auto">
                         <button
                             onClick={() => scrollToSection('living-room')}
-                            className="px-8 py-4 border-2 border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-[#1a1a2e] transition-all duration-300 font-bold tracking-widest text-sm backdrop-blur-sm shadow-xl cursor-pointer"
+                            className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-[#1a1a2e] transition-all duration-300 font-bold tracking-widest text-sm backdrop-blur-sm shadow-xl cursor-pointer w-full sm:w-auto text-center"
                         >
                             VIEW OUR WORK
                         </button>
                         <button
                             onClick={() => scrollToSection('terrace-room')}
-                            className="px-8 py-4 bg-[#C9A84C] text-[#1a1a2e] hover:bg-white transition-all duration-300 font-bold tracking-widest text-sm shadow-[0_0_20px_rgba(201,168,76,0.6)] cursor-pointer"
+                            className="px-6 sm:px-8 py-3 sm:py-4 bg-[#C9A84C] text-[#1a1a2e] hover:bg-white transition-all duration-300 font-bold tracking-widest text-sm shadow-[0_0_20px_rgba(201,168,76,0.6)] cursor-pointer w-full sm:w-auto text-center"
                         >
                             START YOUR PROJECT
                         </button>

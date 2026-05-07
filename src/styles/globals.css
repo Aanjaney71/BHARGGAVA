@@ -12,11 +12,21 @@
     transition: background-color 1.5s ease, color 1.5s ease;
 }
 
+/* ======================================================
+ * Base
+ * ====================================================== */
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    /* Prevent layout shift during font load */
+    font-display: optional;
 }
 
 h1,
@@ -36,10 +46,30 @@ h6 {
     background-color: var(--accent-warm);
 }
 
-/* 
- * Global Pop Effects 
- * Makes major elements pop slightly when hovered 
- */
+/* ======================================================
+ * Parallax Performance
+ * GPU-composited parallax backgrounds — avoids paint during scroll.
+ * `will-change` tells the browser to promote these to their own layer.
+ * ====================================================== */
+.parallax-bg {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* ======================================================
+ * Room Section Containment
+ * `contain: layout` prevents each room's layout changes
+ * from triggering reflow in other rooms during scroll.
+ * ====================================================== */
+.room-section {
+    contain: layout;
+}
+
+/* ======================================================
+ * Global Pop Effects
+ * Makes major elements pop slightly when hovered
+ * ====================================================== */
 .room-section p,
 .room-section h1,
 .room-section h2,
@@ -55,29 +85,39 @@ h6 {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.3s ease, filter 0.3s ease;
 }
 
-.room-section p:hover,
-.room-section h1:hover,
-.room-section h2:hover,
-.room-section h3:hover,
-.room-section h4:hover {
-    transform: scale(1.02);
-    text-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
-    z-index: 10;
-    position: relative;
-}
+/* Disabled on touch/mobile — hover has no meaning on touch */
+@media (hover: hover) {
+    .room-section p:hover,
+    .room-section h1:hover,
+    .room-section h2:hover,
+    .room-section h3:hover,
+    .room-section h4:hover {
+        transform: scale(1.02);
+        text-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+        z-index: 10;
+        position: relative;
+    }
 
-.room-section a:hover,
-.room-section button:hover,
-.room-section .service-item-1:hover,
-.room-section .service-item-2:hover,
-.room-section .review-card:hover,
-.room-section .postcard-form:hover {
-    transform: scale(1.05);
-    z-index: 50;
-    position: relative;
+    .room-section a:hover,
+    .room-section button:hover,
+    .room-section .service-item-1:hover,
+    .room-section .service-item-2:hover,
+    .room-section .review-card:hover,
+    .room-section .postcard-form:hover {
+        transform: scale(1.05);
+        z-index: 50;
+        position: relative;
+    }
 }
 
 /* Prevent backgrounds from scaling unexpectedly */
 .room-section img.parallax-bg:hover {
     transform: none;
+}
+
+/* ======================================================
+ * Smooth image loading
+ * ====================================================== */
+img {
+    content-visibility: auto;
 }
