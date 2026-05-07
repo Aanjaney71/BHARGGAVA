@@ -28,8 +28,7 @@ const ExteriorHero = ({ isGateOpen }) => {
                 }, "-=0.6")
                 .from(".footstep-indicator", {
                     opacity: 0, duration: 0.6
-                }, "-=0.3")
-        });
+                }, "-=0.3");
 
             // Replace raw scroll event with optimized GSAP ScrollTrigger
             gsap.to(".layer-sky", {
@@ -41,7 +40,7 @@ const ExteriorHero = ({ isGateOpen }) => {
                     end: "bottom top",
                     scrub: true
                 }
-            })
+            });
         });
 
         return () => {
