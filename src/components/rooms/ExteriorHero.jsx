@@ -1,52 +1,49 @@
-import React, { useEffect } from 'react'
+import React, { useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import ParticleSystem from '../three/ParticleSystem'
 import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 const ExteriorScene = () => {
     return null // Placeholder for actual 3D objects
 }
 
 const ExteriorHero = ({ isGateOpen }) => {
-    useEffect(() => {
+    const container = useRef(null)
+
+    useGSAP(() => {
         if (!isGateOpen) return
 
-        let ctx = gsap.context(() => {
-            const tl = gsap.timeline({ delay: 0.5 }) // 0.5s delay after gate opens
-            tl.from(".exterior-title span", {
-                opacity: 0,
-                y: 80,
-                stagger: 0.1,
-                duration: 1.2,
-                ease: "power3.out"
-            })
-                .from(".exterior-subtitle", {
-                    opacity: 0, y: 40, duration: 1, ease: "power2.out"
-                }, "-=0.8")
-                .from(".exterior-cta-group", {
-                    opacity: 0, y: 30, duration: 0.8, ease: "power2.out"
-                }, "-=0.6")
-                .from(".footstep-indicator", {
-                    opacity: 0, duration: 0.6
-                }, "-=0.3");
+        const tl = gsap.timeline({ delay: 0.5 }) // 0.5s delay after gate opens
+        tl.from(".exterior-title span", {
+            opacity: 0,
+            y: 80,
+            stagger: 0.1,
+            duration: 1.2,
+            ease: "power3.out"
+        })
+            .from(".exterior-subtitle", {
+                opacity: 0, y: 40, duration: 1, ease: "power2.out"
+            }, "-=0.8")
+            .from(".exterior-cta-group", {
+                opacity: 0, y: 30, duration: 0.8, ease: "power2.out"
+            }, "-=0.6")
+            .from(".footstep-indicator", {
+                opacity: 0, duration: 0.6
+            }, "-=0.3");
 
-            // Replace raw scroll event with optimized GSAP ScrollTrigger
-            gsap.to(".layer-sky", {
-                y: 100, // Roughly equivalent to previous var(--scroll-y) * 0.1
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#exterior-room",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
+        // Replace raw scroll event with optimized GSAP ScrollTrigger
+        gsap.to(".layer-sky", {
+            y: 100, // Roughly equivalent to previous var(--scroll-y) * 0.1
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#exterior-room",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
         });
-
-        return () => {
-            ctx.revert()
-        }
-    }, [isGateOpen])
+    }, { dependencies: [isGateOpen], scope: container, revertOnUpdate: true })
 
     const scrollToSection = (id) => {
         const el = document.getElementById(id)
@@ -58,7 +55,7 @@ const ExteriorHero = ({ isGateOpen }) => {
     const titleWords = ["नमस्ते,", "Step", "Inside."]
 
     return (
-        <div className="room-section relative w-full h-screen bg-[#1a1a2e] overflow-hidden">
+        <div ref={container} className="room-section relative w-full h-screen bg-[#1a1a2e] overflow-hidden">
             {/* Three.js Background */}
             <div className="absolute inset-0 z-0">
                 <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
